@@ -1,0 +1,7 @@
+📅 MODEL TRAINING REPORT
+✅ R² Score   : 0.97755
+✅ MAPE       : 0.39%
+✅ MAE        : 0.0111
+✅ RMSE       : 0.0168
+✅ Max Error  : 0.0746
+⏱️ Total Training Time: 0min 54s

@@ -1,0 +1,2 @@
+path,R² Score,MAPE,MAE,RMSE,Max Error,Total Training Time
+Odens/IA_training/IA_,path to dossier avant txt , 0.99365,0.47%,0.0138,0.0195,0.0883,2min 15s
