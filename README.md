@@ -10,7 +10,7 @@ The magic starts now… 🪄✨
 ## Step 1: Sign Up & Create Your Personal Space
 
 ![Sign Up Page](Platform/page_1.png)
-
+![Login Page](Platform/page_2.png)
 The first thing you’ll do is **sign up**—that creates a secure, personal space just for you!
 We take care of all your data, models, and everything else related to your account. Don’t worry: everything is safely encrypted and isolated.
 When you’ve signed up, simply use your username and password to log in whenever you want.
@@ -19,7 +19,7 @@ When you’ve signed up, simply use your username and password to log in wheneve
 
 ## Step 2: Enter Your Pricing AI Engine
 
-![Login Page](Platform/page_2.png)
+![Login Page](Platform/page_3.png)
 
 Once you log in, you’ll land on your personal dashboard.
 Here, you’ll see today’s **live aluminium price**, updated every time you visit, plus a chart for the last 15 days—so you always have the latest market info right in front of you.
@@ -33,7 +33,7 @@ If it’s your first visit, you have a choice:
 
 ## Step 3: Predict Prices Instantly
 
-![Prediction Page](Platform/page_3.png)
+![Prediction Page](Platform/page_4.png)
 
 Welcome to the most exciting part: **real-time price prediction**!
 Just fill in the fields—dimensions, batch size, alloy, or whatever specs you want—and click predict.
@@ -43,7 +43,7 @@ Your AI model does the heavy lifting and gives you an instant, ultra-accurate pr
 
 ## Step 4: Train & Retrain Like a Pro
 
-![Model Training Page](Platform/page_4.png)
+![Model Training Page](Platform/page_5.png)
 
 Here’s where the AI really shines (trust me, it’s even better than ChatGPT for pricing 😉).
 You can **upload your own data** (PDF quotes only—no messy Excel files), and the system will handle all the data processing, feature engineering, and model training for you.
