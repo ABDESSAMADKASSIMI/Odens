@@ -53,7 +53,7 @@ Every time you predict a price, we keep track. When you reach 50 new predictions
 
 ## Step 5: Check Your Stats & Evaluate Models
 
-![Statistics Page](Platform/page_5.png)
+![Statistics Page](Platform/page_6.png)
 
 This is your “mission control” for AI performance!
 You’ll see the key metrics for every model you train—accuracy, error, and more—plus easy-to-understand charts.
@@ -63,7 +63,7 @@ Didn’t like the latest model? No problem, we make it easy to roll back or try 
 
 ## Step 6: Manage All Your Model Versions
 
-![Version Management Page](Platform/page_6.png)
+![Version Management Page](Platform/page_7.png)
 
 The **Versions page** is your archive and control center:
 
