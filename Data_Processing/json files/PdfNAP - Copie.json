@@ -1,0 +1,61 @@
+{
+    "metadonnees": {
+        "offert": "Offert 1",
+        "Datum": "2025-02-24",
+        "Vår referens": "Filip Ehnberg",
+        "Er referens": "Daniel Fredriksson",
+        "Kund": "Leiab Fönster, Mariannelund"
+    },
+    "produits": [
+        {
+            "Profil nr/Kund ref": "Hörnvinkel",
+            "Vikt kg/m": 1.288,
+            "Längd/m m": 24.6,
+            "Kap + truml Pris/st": 0.75,
+            "ca antal Årsvolym st": 50000,
+            "Prix kr/st SEK": 2.8,
+            "Legering": "Rå"
+        },
+        {
+            "Profil nr/Kund ref": "Hörnvinkel",
+            "Vikt kg/m": 1.288,
+            "Längd/m m": 25.6,
+            "Kap + truml Pris/st": 0.75,
+            "ca antal Årsvolym st": 50000,
+            "Prix kr/st SEK": 2.86,
+            "Legering": "Rå"
+        },
+        {
+            "Profil nr/Kund ref": "Hörnvinkel",
+            "Vikt kg/m": 1.288,
+            "Längd/m m": 24.6,
+            "Kap + truml Pris/st": 0.75,
+            "ca antal Årsvolym st": 100000,
+            "Prix kr/st SEK": 2.78,
+            "Legering": "Rå"
+        },
+        {
+            "Profil nr/Kund ref": "Hörnvinkel",
+            "Vikt kg/m": 1.288,
+            "Längd/m m": 25.6,
+            "Kap + truml Pris/st": 0.75,
+            "ca antal Årsvolym st": 100000,
+            "Prix kr/st SEK": 2.85,
+            "Legering": "Rå"
+        }
+    ],
+    "conditions": {
+        "Verktygskostnad": "13200kr",
+        "Legering": "Rå",
+        "Toleranser": "EN 755-9",
+        "Ytbehandling": "EN-AW-6063-T5",
+        "Lev. längd": "Längder enligt ovan",
+        "Lev. villkor": "Ex Works Markaryd",
+        "Lev. tid": "första 8-10 veckor från order därefter 5-6 veckor",
+        "NOT": "Minst 15000 bitar kapade, ok att blanda längder, inkl trumling",
+        "Betalningsvillkor": "30 dagar netto. Dröjsmålsränta 7,5%",
+        "Giltighet": "Offererade priser gäller fast för leveranser t.o.m. 2025-04-30",
+        "Allmänna villkor": "NAPFV2017",
+        "Råvara": "3,3 Euro / kg"
+    }
+}
