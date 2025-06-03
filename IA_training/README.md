@@ -80,18 +80,25 @@ After all that, **here are our metrics (real example):**
 ---
 
 📈 Visual Results: See for Yourself!
+
+
 <div align="center"><b>Error Distribution</b></div>
 <div align="center"> <img src="IA_/Statistiques/error_distribution.png" width="500"/> </div>
 Shows how “off” the predictions are—our errors cluster tightly around zero. No big surprises or hidden mistakes.
+
 
 <div align="center"><b>True vs Predicted</b></div>
 <div align="center"> <img src="IA_/Statistiques/true_vs_pred.png" width="500"/> </div>
 A perfect diagonal means our AI “thinks” just like a real expert.
 
+
+
 <div align="center"><b>Residuals Plot</b></div>
 <div align="center"> <img src="IA_/Statistiques/residuals.png" width="500"/> </div>
 Helps spot any systematic errors or bias—here, the scatter is tight and even.
 ---
+
+
 
 ### 🧠 Why This Model Pipeline Wins
 
