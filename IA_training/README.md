@@ -85,7 +85,7 @@ You can check our evaluation plots directly in the `Statistiques/` folder (these
 
 #### **Error Distribution**
 
-![Error Distribution](IA_training/IA_/Statistiques/error_distribution.png)
+![Error Distribution](IA_/Statistiques/error_distribution.png)
 
 * *Shows how “off” the predictions are—our errors cluster tightly around zero. No big surprises or hidden mistakes.*
 
