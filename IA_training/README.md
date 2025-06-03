@@ -85,19 +85,19 @@ You can check our evaluation plots directly in the `Statistiques/` folder (these
 
 #### **Error Distribution**
 
-![Error Distribution](Statistiques/error_distribution.png)
+![Error Distribution](IA_training/IA_/Statistiques/error_distribution.png)
 
 * *Shows how “off” the predictions are—our errors cluster tightly around zero. No big surprises or hidden mistakes.*
 
 #### **True vs Predicted**
 
-![True vs Predicted](Statistiques/true_vs_pred.png)
+![True vs Predicted](IA_training/IA_/Statistiques/true_vs_pred.png)
 
 * *A perfect diagonal means our AI “thinks” just like a real expert.*
 
 #### **Residuals Plot**
 
-![Residuals Plot](Statistiques/residuals.png)
+![Residuals Plot](IA_training/IA_/Statistiques/residuals.png)
 
 * *Helps spot any systematic errors or bias—here, the scatter is tight and even.*
 
