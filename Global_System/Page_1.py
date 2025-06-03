@@ -9,7 +9,8 @@ import re
 import yfinance as yf
 from datetime import datetime
 import customtkinter as ctk
-#_
+
+
 DENSITY_ALU = 2700
 TOLERANCE_MAPPING = {
     "EN 755-9": {"linear_tol": 0.15, "angular_tol": 0.5, "flatness": 0.2, "gd_t_index": 2.1},
