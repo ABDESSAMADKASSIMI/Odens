@@ -80,24 +80,17 @@ After all that, **here are our metrics (real example):**
 ---
 
 📈 Visual Results: See for Yourself!
-You can check our evaluation plots directly in the Statistiques/ folder (these show up in your GitHub README automatically):
-
-<div align="center">
-Error Distribution
-<img src="IA_/Statistiques/error_distribution.png" width="500"/>
+<div align="center"><b>Error Distribution</b></div>
+<div align="center"> <img src="IA_/Statistiques/error_distribution.png" width="500"/> </div>
 Shows how “off” the predictions are—our errors cluster tightly around zero. No big surprises or hidden mistakes.
 
-True vs Predicted
-<img src="IA_/Statistiques/true_vs_pred.png" width="500"/>
+<div align="center"><b>True vs Predicted</b></div>
+<div align="center"> <img src="IA_/Statistiques/true_vs_pred.png" width="500"/> </div>
 A perfect diagonal means our AI “thinks” just like a real expert.
----
 
-### 🔍 Error Analysis & Robustness
-
-* We break down performance by profile type, order size, and more—no systematic bias found.
-* Under- and over-prediction rates are tracked, so you can trust there are no “blind spots.”
-* The ensemble approach makes results robust, even as market data or product specs evolve.
-
+<div align="center"><b>Residuals Plot</b></div>
+<div align="center"> <img src="IA_/Statistiques/residuals.png" width="500"/> </div>
+Helps spot any systematic errors or bias—here, the scatter is tight and even.
 ---
 
 ### 🧠 Why This Model Pipeline Wins
