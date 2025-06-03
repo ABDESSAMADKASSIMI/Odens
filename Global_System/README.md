@@ -1,80 +1,109 @@
+Crystal clear!
+You want a **developer/professional-level logic explanation**—not how users interact, but **how the code and functions interact**:
 
+* What gets called,
+* In what order,
+* How user isolation is achieved,
+* How training is triggered and handled,
+* And the reasoning for each key architectural step.
 
-# 🌐 Oden Platform: How Everything Runs Behind the Scenes 🚦🤖
-
-Hey Adam, hey team! Curious about what’s happening under the hood?
-Let’s take a little backstage tour of your Oden Platform—where each user gets their own private AI “lab” and everything is automated, secure, and (let’s be honest) kind of magical.
-
----
-
-### 1️⃣ **Sign Up & Get Your Own Secret Lab 🧪**
-
-When you sign up, Oden Platform doesn’t just jot your name down—it builds a whole digital “lab” just for you!
-You get your own encrypted vault, neatly organized with folders for your training data, predictions, models, and more. (No password leaks—everything’s locked up tighter than a Swedish safe. 🔒)
+You want the **underlying workflow and logic** explained for the client’s technical team or devs, not end users.
+Here’s exactly that, based on your `Page_main.py` and overall architecture—still lively, but precise and functional, with just a hint of emoji.
 
 ---
 
-### 2️⃣ **Login & Land in Your Zone 🚪**
+# 🛠️ Oden Platform – Workflow & Core Logic (For Developers & Technical Teams)
 
-Punch in your credentials, and you’re right back in your lab.
-
-* All your previous data
-* All your models and results
-* Everything’s waiting, and *only you* can see it (not even us—promise!).
+Here’s how Oden Platform orchestrates user isolation, model training, versioning, and real-time updates—step by step, function by function.
 
 ---
 
-### 3️⃣ **The Dashboard: Your AI Command Center 🎛️**
+## 1️⃣ User Context & Workspace Initialization
 
-Zip around the sidebar like a pro:
-
-* 🏠 **Home:** See your welcome message and today’s aluminium prices—live from the market!
-* 📈 **Prediction:** Fill in the blanks, hit go, and get instant price predictions.
-* 🤖 **IA Model:** Upload your latest PDF quotes and watch the AI retrain itself—no PhD required.
-* 📊 **Statistics:** Nerd out on performance graphs and error metrics. Compare different model runs, see where you shine.
-* 📁 **Versions:** All your model versions, in one place—promote, roll back, or delete like a true AI boss.
-
-*(And yes, every button is rigged to only work with **your** data. No accidental “sharing” here!)*
+* **On signup:**
+  The system creates a private directory tree under `Odens/Global_engin/{username}_{password}/`, with subfolders for training data (`DATA_1`), predictions (`DATA_2`), model assets (`IA_Models`), and temp files.
+* **On login:**
+  The app loads `user_info.csv` to build a session context (user profile, first-login status, workspace paths).
+  All future actions (training, prediction, stats) are then *scoped* to this user context—no data ever leaves this sandbox.
 
 ---
 
-### 4️⃣ **Prediction & Continuous Learning: Your AI Gets Smarter While You Sleep 💤**
+## 2️⃣ Page Navigation & Main Event Loop
 
-Every prediction you make? We save it.
-Hit 50 new quotes, and—abracadabra—the system retrains your model with the latest info, all on its own.
-Old models don’t vanish—they’re safely versioned, just in case you want to revisit the “good old days” of last week’s AI.
+* The main interface (`MainApp` in `Page_main.py`) uses **frame switching** to show the correct view:
 
----
-
-### 5️⃣ **Model Versioning: Your AI, Your Rules 🏆**
-
-* Every training run is stored with its own results and timestamp.
-* Want to try an older model? Switch in one click.
-* Tired of a version? Yeet it into the void (delete it, that is).
-* Full history is there for your inner detective.
+  * `LoginFrame` (auth)
+  * `SignupFrame` (user registration)
+  * `Dashboard` (main nav)
+* `Dashboard` further swaps in specialized pages (Prediction, Training, Statistics, Version Control, etc.), always using the current user’s directories as working space.
 
 ---
 
-### 6️⃣ **Security & Privacy: Fort Knox, but Swedish 🛡️**
+## 3️⃣ Data Flow: Prediction and Training
 
-No user can ever peek at another’s data—every folder, every file, every prediction is strictly private.
-Passwords and sensitive stuff? All encrypted, all the time.
-Whether there are 2 or 200 users, nobody steps on anyone else’s toes (or files).
+* **Prediction:**
+
+  * When the user enters product specs and clicks predict, the form collects data and writes it to the current user’s `DATA_2` folder.
+  * The active trained model (loaded from `IA_Models/ensemble_model.pkl`) is used to generate a prediction, which is displayed and also logged for traceability.
+  * Each prediction increments a counter. Once 50 new predictions are reached, the retraining logic is triggered.
+* **Training:**
+
+  * Training is always launched in the context of the current user’s workspace.
+  * When called (from the IA\_Model/Train page or via automatic trigger), the workflow is:
+
+    1. Collect and validate all raw and new PDF data in `DATA_1`.
+    2. Run `main_Data_Processing.py` to extract, clean, validate, and engineer features, then output a training-ready CSV/JSON.
+    3. Call `Model_Training()`, which:
+
+       * Loads and concatenates user data,
+       * Runs feature selection with XGBoost,
+       * Trains an MLP (with the top features),
+       * Creates a VotingRegressor ensemble,
+       * Validates performance, saves metrics and plots,
+       * Serializes the new model and scaler into the user’s `IA_Models` folder (with versioning).
+    4. Updates the model version index, so the dashboard and stats always point to the latest.
 
 ---
 
-### 7️⃣ **A Modern Experience with Real-Time Data 🎨**
+## 4️⃣ Versioning & Audit Trail
 
-* The app feels fast and fresh, thanks to a slick interface (CustomTkinter!).
-* Live aluminium prices update right on your dashboard, so you’re always ahead of the market.
+* Each new training run saves:
 
----
-
-**TL;DR:**
-Oden Platform gives you your own AI pricing “lab” with zero hassle—secure, private, and getting smarter the more you use it.
-The magic? It’s all in the code. And maybe just a bit in the Swedish air. 😉
+  * The model artifacts (`ensemble_model.pkl`, `scaler.pkl`)
+  * All evaluation metrics and plots
+  * A log entry in `evaluations.csv` or an equivalent version-tracking file.
+* Old models are never overwritten—they’re archived by version, allowing full rollback, side-by-side comparison, or audit.
 
 ---
 
-Want a peek at the code, or want a live demo?
-Just ask! We love showing off our “lab” behind the curtain. 🪄
+## 5️⃣ Automation & Continuous Learning
+
+* After every batch of 50 predictions, the retraining trigger is auto-fired.
+
+  * The process above (data processing → training → model promotion) happens in the background.
+  * Users are notified in-app once the new model is available.
+* This **continuous learning loop** ensures the AI gets smarter with real-world use, without manual intervention.
+
+---
+
+## 6️⃣ Security, Privacy, and User Isolation
+
+* All filesystem and memory operations are strictly user-scoped—paths are built from session context and never overlap.
+* Credential validation is enforced at each sensitive operation.
+* No user can access or impact another user’s files, predictions, or models—even with concurrent logins.
+
+---
+
+## 7️⃣ Live Market Data Integration
+
+* On the home page, live aluminium prices are fetched via the `yfinance` API every time the dashboard is loaded.
+* This value is also recorded and used in feature engineering for the most recent predictions, ensuring models always use up-to-date market data.
+
+---
+
+**Summary:**
+The Oden Platform’s logic is designed for end-to-end automation, robust user separation, and smooth retraining—powered by clearly structured function calls and tight workspace scoping. Every step, from data ingestion to model deployment, is tracked, versioned, and instantly recoverable.
+
+---
+
+Want a call graph, more detailed class/function breakdown, or code snippets? Just say the word!
