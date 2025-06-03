@@ -1,16 +1,3 @@
-Crystal clear!
-You want a **developer/professional-level logic explanation**—not how users interact, but **how the code and functions interact**:
-
-* What gets called,
-* In what order,
-* How user isolation is achieved,
-* How training is triggered and handled,
-* And the reasoning for each key architectural step.
-
-You want the **underlying workflow and logic** explained for the client’s technical team or devs, not end users.
-Here’s exactly that, based on your `Page_main.py` and overall architecture—still lively, but precise and functional, with just a hint of emoji.
-
----
 
 # 🛠️ Oden Platform – Workflow & Core Logic (For Developers & Technical Teams)
 
@@ -21,7 +8,7 @@ Here’s how Oden Platform orchestrates user isolation, model training, versioni
 ## 1️⃣ User Context & Workspace Initialization
 
 * **On signup:**
-  The system creates a private directory tree under `Odens/Global_engin/{username}_{password}/`, with subfolders for training data (`DATA_1`), predictions (`DATA_2`), model assets (`IA_Models`), and temp files.
+  The system creates a private directory tree under `Odens/Global_engin/{first_name}_{last_name}/`, with subfolders for training data (`DATA_1`), predictions (`DATA_2`), model assets (`IA_Models`), and temp files.
 * **On login:**
   The app loads `user_info.csv` to build a session context (user profile, first-login status, workspace paths).
   All future actions (training, prediction, stats) are then *scoped* to this user context—no data ever leaves this sandbox.
