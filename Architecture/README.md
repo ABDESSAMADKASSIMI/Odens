@@ -1,5 +1,5 @@
 
-##📝 Architecture / Conception Trace
+## 📝 Architecture / Conception Trace
 Hey,
 
 This folder just contains the hand-drawn conception/architecture diagrams (tracés) I made.
