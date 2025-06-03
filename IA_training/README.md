@@ -1,116 +1,83 @@
 
-# 🧠 Model Development, Training & Evaluation
 
-Hello again Adam & team!
+## 🏗️ What We Explored: Model Architectures & Lessons Learned
 
-After testing **six different model versions**—from classic regressors to deep neural nets, single models and pure ensembles—we found a solution that genuinely amazed us.
-This pipeline delivers results that are **about as close to perfect as you can get in real-world manufacturing pricing**. 🚀
+We didn’t settle for the first idea—we explored several model families to see what truly fit our data and use case. Here’s how our thinking (and results) evolved over time:
 
 ---
 
-## 🚀 Model Pipeline: From Data to Accurate Predictions
+**I. Classic Machine Learning: Building a Solid Baseline**
 
-### 1️⃣ **User-Specific Training, Smart Architecture Choice**
+We began with traditional approaches: Linear Regression, Ridge/Lasso, Random Forests, and standalone XGBoost. These are fast and easy to interpret, making them ideal for validating our data pipeline and providing a benchmark.
 
-* Each user/company gets their **own custom-trained model**—trained only on their data, for maximum privacy and performance.
-* We experimented with:
-
-  * Neural Networks (MLP) for tabular data
-  * XGBoost and other tree models
-  * Stacked/ensemble solutions
-  * Feature fusion approaches
+*Lesson learned:*
+They perform well on broad patterns but struggle with the nuanced, nonlinear pricing found in our quotes. Still, these models helped us spot issues in data quality and feature consistency at an early stage.
 
 ---
 
-### 2️⃣ **Automatic Feature Selection with XGBoost**
+**II. Deep Learning for Tabular Data: Going Beyond the Basics**
 
-* **How does it work?**
-  Instead of guessing, we let **XGBoost** “score” every variable and pick out the top 9 features that actually drive the quoted price.
+Next, we implemented a multi-layer perceptron (MLP)—a deep neural network with several hidden layers, regularization, and early stopping. Our goal was to let the network discover complex interactions (for example, when a specific profile, alloy, and customer together affect price).
 
-  * Example features: length, weight, DFM score, LME price, batch size, etc.
-* **Justification:**
-  This keeps the model focused, fast, and robust.
-  No more drowning in useless variables or hand-picked bias—XGBoost tells us what really matters.
+*Lesson learned:*
+MLPs were better at modeling rare and subtle patterns, but required careful tuning. We used both random search and Bayesian optimization to set hyperparameters (learning rates, layer sizes, etc.), and this iterative process improved stability and accuracy.
 
 ---
 
-### 3️⃣ **Deep Learning with MLP (Multi-Layer Perceptron)**
+**III. Feature Selection and Fusion: Listening to the Data**
 
-* With the right features in hand, we train a deep MLP model—perfect for learning the “hidden rules” and nonlinearities in pricing.
-* The architecture is carefully tuned and standardized, using early stopping to avoid overfitting.
+Rather than hand-picking features, we leaned on XGBoost’s feature importance rankings to select the top nine most predictive variables for each training run. This not only made every model more efficient but also helped avoid human bias and overfitting.
 
----
-
-### 4️⃣ **Ensembling for the Best of Both Worlds**
-
-* We blend XGBoost and MLP predictions using a **VotingRegressor**—giving us the power and crispness of trees, plus the flexibility of neural nets.
-* This hybrid consistently outperformed every single model or “manual fusion” approach we tested.
+*Lesson learned:*
+This approach resulted in leaner, more robust models. It’s always tempting to “trust your gut” about what matters, but letting the data decide led to consistently better results.
 
 ---
 
-### 5️⃣ **Thorough Training, Robust Validation**
+**IV. Ensembling: Combining the Best of Both Worlds**
 
-* Data is split with appropriate train/test validation, and we use time-aware splits for features that depend on trends (like LME price).
-* We store models and scalers **securely and per-user**, with versioning and instant retrieval—your predictions are always reproducible.
+We experimented with stacking and blending different models, but found that a simple VotingRegressor—combining XGBoost and MLP—delivered the best balance of performance and reliability. Both models use the selected features, and their outputs are averaged for final predictions.
 
----
-
-### 6️⃣ **Automated Hyperparameter Optimization**
-
-* Our pipeline supports plug-and-play optimization (Bayesian, random search, etc.), so models are always trained with the best settings for the data at hand.
+*Lesson learned:*
+XGBoost excels at crisp, rule-based splits, while MLPs fill in subtle or unexpected relationships. Averaging their outputs yielded more accurate and robust results, particularly on unseen data or new product types.
 
 ---
 
-## 📊 Results: Near-Perfect Performance!
+**V. Training and Validation: Keeping It Honest**
 
-After all that, **here are our metrics (real example):**
+We rigorously split data for training and validation, always reporting key metrics like R², MAPE, MAE, RMSE, and Max Error. For time-dependent features (such as LME price), we used time-aware splits to avoid look-ahead bias. Every model version, metric, and error plot is saved, allowing us (and you) to review or audit any run.
 
-```
-                📅 MODEL TRAINING REPORT
-                ✅ R² Score   : 0.99755
-                ✅ MAPE       : 0.39%
-                ✅ MAE        : 0.0111
-                ✅ RMSE       : 0.0168
-                ✅ Max Error  : 0.0146
-                ⏱️ Total Training Time: 5min 54s
-```
-
-> **Translation:** We’re explaining *almost 100%* of the pricing variation, and average error is less than half a percent. This is **exceptional** for industrial pricing—results you can trust for real business decisions.
+*Lesson learned:*
+Careful validation and record-keeping were just as important as model choice. It kept us honest and made it easier to spot, understand, and fix mistakes.
 
 ---
 
-📈 Visual Results: See for Yourself!
+**VI. Hyperparameter Tuning: No One-Size-Fits-All**
 
+Our pipeline incorporates automated hyperparameter search—using both random and Bayesian methods. This helped us optimize for each new batch of user data and improved generalization, without relying on fixed, “one-size-fits-all” settings.
 
-<div align="center"><b>Error Distribution</b></div>
-<div align="center"> <img src="IA_/Statistiques/error_distribution.png" width="500"/> </div>
-Shows how “off” the predictions are—our errors cluster tightly around zero. No big surprises or hidden mistakes.
-
-
-<div align="center"><b>True vs Predicted</b></div>
-<div align="center"> <img src="IA_/Statistiques/true_vs_pred.png" width="500"/> </div>
-A perfect diagonal means our AI “thinks” just like a real expert.
-
-
-
-<div align="center"><b>Residuals Plot</b></div>
-<div align="center"> <img src="IA_/Statistiques/residuals.png" width="500"/> </div>
-Helps spot any systematic errors or bias—here, the scatter is tight and even.
----
-
-
-
-### 🧠 Why This Model Pipeline Wins
-
-* **Data-driven feature selection:** XGBoost automatically finds what matters most—no human bias.
-* **Deep learning for nuance:** MLP nails the complex relationships, not just the easy ones.
-* **Ensemble for safety:** You get the accuracy *and* the stability.
-* **Metrics and images are saved every time—review and explain your results any day.**
+*Lesson learned:*
+Even strong models can underperform if poorly tuned, so ongoing optimization is built into the workflow.
 
 ---
 
-> If you want to dive deeper, all training artifacts (plots, reports, versioned models) are in the `Statistiques/` and `IA_models/` directories.
-> Curious how a particular profile type performed? Or want to retrain with new data? It’s all modular and ready for you.
+**VII. Continuous Learning and Versioning**
+
+The system automatically retrains after every 50 new predictions, saving each new model as a unique version. All historical models, reports, and plots are accessible for comparison, rollback, or auditing.
+
+*Lesson learned:*
+Traceability and transparency are critical—especially in environments where models evolve with fresh data.
 
 ---
 
+**Why We Chose This Final Architecture**
+
+After working through these stages (and a fair amount of trial and error), we settled on the current ensemble approach:
+
+* XGBoost for feature selection and rule-based prediction,
+* MLP for nuanced, nonlinear effects,
+* VotingRegressor to blend the strengths of both,
+* Top nine features to maximize signal and minimize noise.
+
+This combination delivered high, reliable accuracy (R² > 0.997, MAPE < 0.4%) and proved robust across new users, profile types, and pricing scenarios.
+
+We’re proud of the results, but always aware that every dataset (and every client) brings its own surprises. That’s why the workflow remains modular and open for improvement.
