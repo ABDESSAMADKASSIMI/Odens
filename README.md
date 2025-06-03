@@ -76,7 +76,7 @@ Not happy with the latest model? No problem, we keep every version you train, so
 
 ## 7️⃣ Model Version Control: You’re the Boss
 
-![Versions Page](Platform/page_6.png)
+![Versions Page](Platform/page_7.png)
 
 Every version of your AI model is listed here.
 Want to **promote** a model to “active”? Go for it.
