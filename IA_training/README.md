@@ -79,28 +79,17 @@ After all that, **here are our metrics (real example):**
 
 ---
 
-### 📈 Visual Results: See for Yourself!
+📈 Visual Results: See for Yourself!
+You can check our evaluation plots directly in the Statistiques/ folder (these show up in your GitHub README automatically):
 
-You can check our evaluation plots directly in the `Statistiques/` folder (these show up in your GitHub README automatically if you use the markdown below):
+<div align="center">
+Error Distribution
+<img src="IA_/Statistiques/error_distribution.png" width="500"/>
+Shows how “off” the predictions are—our errors cluster tightly around zero. No big surprises or hidden mistakes.
 
-#### **Error Distribution**
-
-![Error Distribution](IA_/Statistiques/error_distribution.png)
-
-* *Shows how “off” the predictions are—our errors cluster tightly around zero. No big surprises or hidden mistakes.*
-
-#### **True vs Predicted**
-
-![True vs Predicted](IA_/Statistiques/true_vs_pred.png)
-
-* *A perfect diagonal means our AI “thinks” just like a real expert.*
-
-#### **Residuals Plot**
-
-![Residuals Plot](IA_/Statistiques/residuals.png)
-
-* *Helps spot any systematic errors or bias—here, the scatter is tight and even.*
-
+True vs Predicted
+<img src="IA_/Statistiques/true_vs_pred.png" width="500"/>
+A perfect diagonal means our AI “thinks” just like a real expert.
 ---
 
 ### 🔍 Error Analysis & Robustness
