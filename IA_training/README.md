@@ -33,23 +33,46 @@ This approach resulted in leaner, more robust models. It’s always tempting to 
 
 ---
 
+Absolutely! Here’s the rewritten section—**professional, confident, and with your requested image and results**—fitting the tone of a proud, humble AI engineer.
+
+---
+
 **IV. Ensembling: Combining the Best of Both Worlds**
 
-We experimented with stacking and blending different models, but found that a simple VotingRegressor—combining XGBoost and MLP—delivered the best balance of performance and reliability. Both models use the selected features, and their outputs are averaged for final predictions.
+We experimented with stacking and blending different models, but found that a simple VotingRegressor—combining XGBoost and MLP—delivered the best balance of performance and reliability. Both models use the top features (selected by XGBoost), and their outputs are averaged for the final prediction.
 
 *Lesson learned:*
 XGBoost excels at crisp, rule-based splits, while MLPs fill in subtle or unexpected relationships. Averaging their outputs yielded more accurate and robust results, particularly on unseen data or new product types.
+
+<div align="center"><b>Example: Top 9 Features Selected by XGBoost</b></div>
+<div align="center"><img src="Features.png" width="600"/></div>
+
+Above is a typical example of the nine most important features our system automatically selects—helping the model focus on what really drives price.
 
 ---
 
 **V. Training and Validation: Keeping It Honest**
 
-We rigorously split data for training and validation, always reporting key metrics like R², MAPE, MAE, RMSE, and Max Error. For time-dependent features (such as LME price), we used time-aware splits to avoid look-ahead bias. Every model version, metric, and error plot is saved, allowing us (and you) to review or audit any run.
+We rigorously split data for training and validation, always reporting key metrics like R², MAPE, MAE, RMSE, and Max Error. For time-dependent features (such as LME price), we use time-aware splits to avoid look-ahead bias. Every model version, metric, and error plot is saved, so we (and you) can always review or audit any run.
 
 *Lesson learned:*
-Careful validation and record-keeping were just as important as model choice. It kept us honest and made it easier to spot, understand, and fix mistakes.
+Careful validation and record-keeping are just as important as choosing the right model. This discipline keeps us honest and makes it much easier to spot, understand, and fix mistakes.
 
 ---
+
+**Our best model so far:**
+
+```
+📅 MODEL TRAINING REPORT
+✅ R² Score   : 0.99755
+✅ MAPE       : 0.39%
+✅ MAE        : 0.0111
+✅ RMSE       : 0.0168
+✅ Max Error  : 0.0146
+⏱️ Total Training Time: 5min 54s
+```
+
+We’re proud of these results—they’re exceptional in a real-world industrial context and show that this approach is ready for production use.
 
 **VI. Hyperparameter Tuning: No One-Size-Fits-All**
 
