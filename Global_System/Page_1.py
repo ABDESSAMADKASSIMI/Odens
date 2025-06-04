@@ -175,7 +175,8 @@ class PredictionPage(ctk.CTkFrame):
             next(reader)
             first_data = next(reader)
             model_base_path = first_data[1]
-        return os.path.join(model_base_path, "IA_")
+        return model_base_path
+
 
     def predict_action(self):
         try:
